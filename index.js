@@ -11,14 +11,13 @@ if (cluster.isMaster) {
     var express = require('express');
     var app = express();
 
-    var ip = require('ip');
     var geoip = require('geoip-lite');
     var cors = require('cors');
 
     app.use(cors());
     app.use(function (req, res, next) {
-        var geo = geoip.lookup(ip.isPrivate(req.ip) ? '8.8.8.8' : req.ip);
-        console.log('geo', geo);
+        var geo = geoip.lookup(req.ip);
+        console.log(req.ip, geo);
         res.status(200).json(geo);
     });
 

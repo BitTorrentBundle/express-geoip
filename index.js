@@ -14,6 +14,7 @@ if (cluster.isMaster) {
     var geoip = require('geoip-lite');
     var cors = require('cors');
 
+    app.enable('trust proxy');
     app.use(cors());
     app.use(function (req, res, next) {
         var geo = geoip.lookup(req.ip);
